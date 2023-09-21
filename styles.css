@@ -39,9 +39,11 @@ body {
     border-radius: 20px;
 }
     
-.current-temperature {  
+.current-location-temperature {  
     width: 100%;  
-    border: 3px solid yellow;  
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
 }  
     
 .current-stats {  
