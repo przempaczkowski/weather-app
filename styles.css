@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {  
+    margin: 16px;  
+    font-size: 100%;   
+    color: white;  
+    height: 100%;  
+    background: linear-gradient(150deg, rgb(68, 176, 184) 0%, rgb(3, 94, 146) 100%);  
+    background-repeat: no-repeat;  
+    background-attachment: fixed;  
+  }  
+    
+.main-container {  
+    display: flex;  
+    flex-wrap: wrap;  
+}  
+    
+.location-and-date {  
+    width: 100%;  
+    border: 3px solid blue;  
+}  
+    
+.current-temperature {  
+    width: 100%;  
+    border: 3px solid yellow;  
+}  
+    
+.current-stats {  
+    width: 100%;  
+    border: 3px solid red;  
+}  
+    
+.weather-by-hour {  
+    display: none;  
+    width: 100%;  
+    border: 3px solid blue;  
+}  
+    
+.next-5-days {  
+    width: 100%;  
+    border: 3px solid yellow;  
+}
+@media screen and (min-width: 1140px) {
+    .main-container {
+      width: 1120px;
+      margin: 16px auto;
+      font-size: 1.1em;
+    }
+}
