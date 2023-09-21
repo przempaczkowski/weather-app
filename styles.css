@@ -10,19 +10,20 @@ body {
     font-size: 100%;   
     color: white;  
     height: 100%;  
-    background: linear-gradient(150deg, rgb(68, 176, 184) 0%, rgb(3, 94, 146) 100%);  
-    background-repeat: no-repeat;  
+    background: linear-gradient(150deg, rgb(2, 112, 103) 0%, rgb(63, 173, 236) 100%);  
     background-attachment: fixed;  
-  }  
+}  
     
 .main-container {  
     display: flex;  
     flex-wrap: wrap;  
 }  
     
-.location-and-date {  
+.search {  
     width: 100%;  
-    border: 3px solid blue;  
+    display: flex;
+    align-items: center;  
+    justify-content: space-between;
 }  
     
 .current-temperature {  
