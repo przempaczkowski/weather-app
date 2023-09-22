@@ -45,7 +45,11 @@ body {
     align-items: center;
     justify-content: center;
 }  
-    
+
+.current-location-temperature img {
+    border-radius: 20px;
+}
+
 .current-stats {  
     width: 100%;  
     border: 3px solid red;  
