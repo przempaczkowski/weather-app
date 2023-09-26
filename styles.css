@@ -43,6 +43,7 @@ body {
 .current-location-temperature {  
     width: 100%;  
     gap: 2rem;
+    font-size: 36px;
     flex-direction: column;
     font-weight: 700;
     margin-top: 4rem;
@@ -70,6 +71,8 @@ body {
 }
 
 .current-stats p {
+    font-size: 13px;
+    font-weight: 600;
     display: flex;
     padding-left: 0.5rem;
     padding-top: 0.2rem;
