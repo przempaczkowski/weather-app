@@ -40,7 +40,10 @@ body {
     
 .current-location-temperature {  
     width: 100%;  
-    gap: 1rem;
+    gap: 2rem;
+    flex-direction: column;
+    font-weight: 700;
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,10 +55,27 @@ body {
 
 .current-stats {  
     width: 100%;  
-    border: 3px solid red;  
+    gap: 3rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }  
+.col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-stats p {
+    display: flex;
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+    justify-content: center;
+    align-items: center;
+}
     
-.weather-by-hour {  
+/* .weather-by-hour {  
     display: none;  
     width: 100%;  
     border: 3px solid blue;  
@@ -64,7 +84,7 @@ body {
 .next-5-days {  
     width: 100%;  
     border: 3px solid yellow;  
-}
+} */
 @media screen and (min-width: 1140px) {
     .main-container {
       width: 1120px;
