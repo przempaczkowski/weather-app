@@ -92,6 +92,9 @@ body {
     width: 100%;  
     border: 3px solid yellow;  
 } */
+.weather {
+    display: none;
+}
 @media screen and (min-width: 1140px) {
     .main-container {
       width: 1120px;

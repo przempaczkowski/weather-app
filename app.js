@@ -44,6 +44,8 @@ async function checkWeather(location) {
         else if(data.weather[0].main == "Clear") {
             weatherIcon.src = "images/sunny.svg"
         }
+
+    document.querySelector(".weather").style.display = "block";
         
     }
 
