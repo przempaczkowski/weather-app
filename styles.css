@@ -52,8 +52,10 @@ body {
     justify-content: center;
 }  
 
-.current-location-temperature img {
+.weather-icon {
     border-radius: 20px;
+    height: 80px;
+    width: 80px;
 }
 
 .current-stats {  
