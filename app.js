@@ -51,7 +51,15 @@ async function checkWeather(location) {
         
     }        
 
+searchBox.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === "Enter") {
+        checkWeather(searchBox.value);
+    }
+});
 
 searchBtn.addEventListener("click", () => {
     checkWeather(searchBox.value);
 });
+
+
