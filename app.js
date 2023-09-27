@@ -9,6 +9,10 @@ const weatherIcon = document.querySelector(".weather-icon");
 async function checkWeather(location) {
     
         const response = await fetch(apiUrl + location + `&appid=${apiKey}`);
+        if (response.status == '404') {
+            alert("City not found, try again");
+        }
+        console.log(response);
         const data = await response.json();
         console.log(data);
         document.querySelector(".location").textContent = data.name;
@@ -41,9 +45,12 @@ async function checkWeather(location) {
             weatherIcon.src = "images/sunny.svg"
         }
 
-    document.querySelector(".weather").style.display = "block";
         
-}
+    document.querySelector(".weather").style.display = "block";
+
+        
+    }        
+
 
 searchBtn.addEventListener("click", () => {
     checkWeather(searchBox.value);
