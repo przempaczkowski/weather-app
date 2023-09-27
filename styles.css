@@ -82,7 +82,26 @@ body {
     justify-content: center;
     align-items: center;
 }
-    
+.forecast {
+    display: flex;
+    margin-top: 6rem;
+    justify-content: space-around;
+    align-items: center;
+}
+.day {
+    display: flex;
+    font-size: 13px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.forecast img {
+    border-radius: 20px;
+    height: 60px;
+    width: 60px;
+}    
 /* .weather-by-hour {  
     display: none;  
     width: 100%;  

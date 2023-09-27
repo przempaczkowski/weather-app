@@ -10,7 +10,7 @@ async function checkWeather(location) {
     
         const response = await fetch(apiUrl + location + `&appid=${apiKey}`);
         if (response.status == '404') {
-            alert("City not found, try again");
+            alert("City not found, try again. English letters only. You can try to use country code, for example: London, US");
         }
         console.log(response);
         const data = await response.json();
