@@ -90,12 +90,15 @@ body {
 }
 .day {
     display: flex;
-    font-size: 13px;
     font-weight: bold;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
+}
+.day p {
+    font-size: 12px;
+    padding: 1px;
 }
 .forecast img {
     border-radius: 20px;
