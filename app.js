@@ -24,8 +24,8 @@ async function checkWeather(location) {
         console.log(cityName);
 
         const forecast = await fetch(forecastApiUrl + `lat=${lat}` + `&lon=${lon}` + `&appid=${apiKey}`);
-        const forecastdata = await forecast.json();
-        console.log(forecastdata);
+        const forecastData = await forecast.json();
+        console.log(forecastData);
 
         // current data
         document.querySelector(".location").textContent = data.name;
@@ -37,23 +37,23 @@ async function checkWeather(location) {
             Math.round(data.main.feels_like) + "°C";
 
         // forecasted data
-        document.querySelector(".day1").textContent = forecastdata.list[5].dt_txt.split(" ")[0];
-        document.querySelector(".day2").textContent = forecastdata.list[13].dt_txt.split(" ")[0];
-        document.querySelector(".day3").textContent = forecastdata.list[21].dt_txt.split(" ")[0];
-        document.querySelector(".day4").textContent = forecastdata.list[29].dt_txt.split(" ")[0];
-        document.querySelector(".day5").textContent = forecastdata.list[37].dt_txt.split(" ")[0];
+        document.querySelector(".day1").textContent = forecastData.list[5].dt_txt.split(" ")[0];
+        document.querySelector(".day2").textContent = forecastData.list[13].dt_txt.split(" ")[0];
+        document.querySelector(".day3").textContent = forecastData.list[21].dt_txt.split(" ")[0];
+        document.querySelector(".day4").textContent = forecastData.list[29].dt_txt.split(" ")[0];
+        document.querySelector(".day5").textContent = forecastData.list[37].dt_txt.split(" ")[0];
 
-        document.querySelector(".max1").textContent = Math.round(forecastdata.list[5].main.temp_min) + "°C";
-        document.querySelector(".max2").textContent = Math.round(forecastdata.list[13].main.temp_min) + "°C";
-        document.querySelector(".max3").textContent = Math.round(forecastdata.list[21].main.temp_min) + "°C";
-        document.querySelector(".max4").textContent = Math.round(forecastdata.list[29].main.temp_min) + "°C";
-        document.querySelector(".max5").textContent = Math.round(forecastdata.list[37].main.temp_min) + "°C";
+        document.querySelector(".max1").textContent = "Max " + Math.round(forecastData.list[5].main.temp_min) + "°C";
+        document.querySelector(".max2").textContent = "Max " + Math.round(forecastData.list[13].main.temp_min) + "°C";
+        document.querySelector(".max3").textContent = "Max " + Math.round(forecastData.list[21].main.temp_min) + "°C";
+        document.querySelector(".max4").textContent = "Max " + Math.round(forecastData.list[29].main.temp_min) + "°C";
+        document.querySelector(".max5").textContent = "Max " + Math.round(forecastData.list[37].main.temp_min) + "°C";
 
-        document.querySelector(".min1").textContent = Math.round(forecastdata.list[2].main.temp_max) + "°C";
-        document.querySelector(".min2").textContent = Math.round(forecastdata.list[10].main.temp_max) + "°C";
-        document.querySelector(".min3").textContent = Math.round(forecastdata.list[18].main.temp_max) + "°C";
-        document.querySelector(".min4").textContent = Math.round(forecastdata.list[26].main.temp_max) + "°C";
-        document.querySelector(".min5").textContent = Math.round(forecastdata.list[34].main.temp_max) + "°C";
+        document.querySelector(".min1").textContent = "Min " + Math.round(forecastData.list[2].main.temp_max) + "°C";
+        document.querySelector(".min2").textContent = "Min " + Math.round(forecastData.list[10].main.temp_max) + "°C";
+        document.querySelector(".min3").textContent = "Min " + Math.round(forecastData.list[18].main.temp_max) + "°C";
+        document.querySelector(".min4").textContent = "Min " + Math.round(forecastData.list[26].main.temp_max) + "°C";
+        document.querySelector(".min5").textContent = "Min " + Math.round(forecastData.list[34].main.temp_max) + "°C";
 
         if(data.weather[0].main == "Clouds") {
             weatherIcon.src = "images/cloudy.svg"

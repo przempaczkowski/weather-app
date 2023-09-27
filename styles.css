@@ -99,6 +99,7 @@ body {
 }
 .day p {
     font-size: 12px;
+    font-weight: 900;
     padding: 1px;
 }
 .forecast img {
