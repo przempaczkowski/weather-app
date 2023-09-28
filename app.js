@@ -27,6 +27,23 @@ async function checkWeather(location) {
         const forecast = await fetch(forecastApiUrl + `lat=${lat}` + `&lon=${lon}` + `&appid=${apiKey}`);
         const forecastData = await forecast.json();
         console.log(forecastData);
+        //filtering data so it contains objects including "15:00:00" and "03:00:00" strings
+        const filteredData = forecastData.list.filter(day => {
+        const dtTxt = day.dt_txt;
+        return dtTxt.includes("15:00:00") || dtTxt.includes("03:00:00");
+        });
+          
+        console.log(filteredData);
+
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        // Filter the data to exclude items with today's date
+        const filteredDataExcludingToday = filteredData.filter(day => {
+        const dtDate = day.dt_txt.split(' ')[0]; // Extract the date part
+        return dtDate !== currentDate;
+        });
+
+        console.log(filteredDataExcludingToday);
 
         // current data
         document.querySelector(".location").textContent = data.name;
@@ -44,50 +61,50 @@ async function checkWeather(location) {
         document.querySelector(".weather-icon").src = showCurrentIcon;    
 
         // forecasted data
-        document.querySelector(".day1").textContent = forecastData.list[5].dt_txt.split(" ")[0];
-        document.querySelector(".day2").textContent = forecastData.list[13].dt_txt.split(" ")[0];
-        document.querySelector(".day3").textContent = forecastData.list[21].dt_txt.split(" ")[0];
-        document.querySelector(".day4").textContent = forecastData.list[29].dt_txt.split(" ")[0];
-        document.querySelector(".day5").textContent = forecastData.list[37].dt_txt.split(" ")[0];
+        document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
+        document.querySelector(".day2").textContent = filteredDataExcludingToday[0].dt_txt.split(" ")[0];
+        document.querySelector(".day3").textContent = filteredDataExcludingToday[2].dt_txt.split(" ")[0];
+        document.querySelector(".day4").textContent = filteredDataExcludingToday[4].dt_txt.split(" ")[0];
+        document.querySelector(".day5").textContent = filteredDataExcludingToday[6].dt_txt.split(" ")[0];
 
-        document.querySelector(".max1").textContent = "Max " + Math.round(forecastData.list[5].main.temp_min) + "°C";
-        document.querySelector(".max2").textContent = "Max " + Math.round(forecastData.list[13].main.temp_min) + "°C";
-        document.querySelector(".max3").textContent = "Max " + Math.round(forecastData.list[21].main.temp_min) + "°C";
-        document.querySelector(".max4").textContent = "Max " + Math.round(forecastData.list[29].main.temp_min) + "°C";
-        document.querySelector(".max5").textContent = "Max " + Math.round(forecastData.list[37].main.temp_min) + "°C";
+        document.querySelector(".max1").textContent = "Max " + Math.round(data.main.temp_max) + "°C";
+        document.querySelector(".max2").textContent = "Max " + Math.round(filteredDataExcludingToday[1].main.temp) + "°C";
+        document.querySelector(".max3").textContent = "Max " + Math.round(filteredDataExcludingToday[3].main.temp) + "°C";
+        document.querySelector(".max4").textContent = "Max " + Math.round(filteredDataExcludingToday[5].main.temp) + "°C";
+        document.querySelector(".max5").textContent = "Max " + Math.round(filteredDataExcludingToday[7].main.temp) + "°C";
 
-        document.querySelector(".min1").textContent = "Min " + Math.round(forecastData.list[2].main.temp_max) + "°C";
-        document.querySelector(".min2").textContent = "Min " + Math.round(forecastData.list[10].main.temp_max) + "°C";
-        document.querySelector(".min3").textContent = "Min " + Math.round(forecastData.list[18].main.temp_max) + "°C";
-        document.querySelector(".min4").textContent = "Min " + Math.round(forecastData.list[26].main.temp_max) + "°C";
-        document.querySelector(".min5").textContent = "Min " + Math.round(forecastData.list[34].main.temp_max) + "°C";
+        document.querySelector(".min1").textContent = "Min " + Math.round(data.main.temp_min) + "°C";
+        document.querySelector(".min2").textContent = "Min " + Math.round(filteredDataExcludingToday[0].main.temp) + "°C";
+        document.querySelector(".min3").textContent = "Min " + Math.round(filteredDataExcludingToday[2].main.temp) + "°C";
+        document.querySelector(".min4").textContent = "Min " + Math.round(filteredDataExcludingToday[4].main.temp) + "°C";
+        document.querySelector(".min5").textContent = "Min " + Math.round(filteredDataExcludingToday[6].main.temp) + "°C";
 
         
-        const ikona = forecastData.list[3].weather[0].icon;
+        const ikona = data.weather[0].icon;
         console.log(ikona);
         let ikonaUrl = (weatherIconUrl + `${ikona}` + "@2x.png");
         console.log(ikonaUrl);
         document.querySelector(".myImg1").src = ikonaUrl;
 
-        const ikona2 = forecastData.list[10].weather[0].icon;
+        const ikona2 = filteredDataExcludingToday[1].weather[0].icon;
         console.log(ikona2);
         let ikonaUrl2 = (weatherIconUrl + `${ikona2}` + "@2x.png");
         console.log(ikonaUrl2);
         document.querySelector(".myImg2").src = ikonaUrl2;
 
-        const ikona3 = forecastData.list[18].weather[0].icon;
+        const ikona3 = filteredDataExcludingToday[3].weather[0].icon;
         console.log(ikona3);
         let ikonaUrl3 = (weatherIconUrl + `${ikona3}` + "@2x.png");
         console.log(ikonaUrl3);
         document.querySelector(".myImg3").src = ikonaUrl3;
 
-        const ikona4 = forecastData.list[26].weather[0].icon;
+        const ikona4 = filteredDataExcludingToday[5].weather[0].icon;
         console.log(ikona4);
         let ikonaUrl4 = (weatherIconUrl + `${ikona4}` + "@2x.png");
         console.log(ikonaUrl4);
         document.querySelector(".myImg4").src = ikonaUrl4;
 
-        const ikona5 = forecastData.list[34].weather[0].icon;
+        const ikona5 = filteredDataExcludingToday[7].weather[0].icon;
         console.log(ikona5);
         let ikonaUrl5 = (weatherIconUrl + `${ikona5}` + "@2x.png");
         console.log(ikonaUrl5);
