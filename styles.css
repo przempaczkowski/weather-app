@@ -61,7 +61,7 @@ body {
 
 .current-stats {  
     width: 100%;  
-    gap: 3rem;
+    gap: 8rem;
     margin-top: 5rem;
     display: flex;
     align-items: center;
@@ -69,8 +69,11 @@ body {
 }  
 .col {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+}
+.col img {
+    height: 80px;
+    width: 80px;
 }
 
 .current-stats p {
@@ -102,6 +105,7 @@ body {
     font-weight: 900;
     padding: 1px;
 }
+
 .forecast img {
     border-radius: 20px;
     height: 60px;

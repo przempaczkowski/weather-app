@@ -5,6 +5,7 @@ const forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=m
 const searchBox = document.querySelector(".search-input");
 const searchBtn = document.querySelector(".search-button");
 const weatherIcon = document.querySelector(".weather-icon");
+const weatherIconUrl = "https://openweathermap.org/img/wn/"
 
 
 async function checkWeather(location) {
@@ -36,6 +37,12 @@ async function checkWeather(location) {
         document.querySelector(".feels-like").textContent =
             Math.round(data.main.feels_like) + "°C";
 
+        const currentIcon = data.weather[0].icon;
+        console.log(currentIcon);
+        let showCurrentIcon = (weatherIconUrl + `${currentIcon}` + "@2x.png");
+        console.log(showCurrentIcon);
+        document.querySelector(".weather-icon").src = showCurrentIcon;    
+
         // forecasted data
         document.querySelector(".day1").textContent = forecastData.list[5].dt_txt.split(" ")[0];
         document.querySelector(".day2").textContent = forecastData.list[13].dt_txt.split(" ")[0];
@@ -55,27 +62,36 @@ async function checkWeather(location) {
         document.querySelector(".min4").textContent = "Min " + Math.round(forecastData.list[26].main.temp_max) + "°C";
         document.querySelector(".min5").textContent = "Min " + Math.round(forecastData.list[34].main.temp_max) + "°C";
 
-        if(data.weather[0].main == "Clouds") {
-            weatherIcon.src = "images/cloudy.svg"
-        }
-        else if(data.weather[0].main == "Thunderstorm") {
-            weatherIcon.src = "images/lightning.svg"
-        }
-        else if(data.weather[0].main == "Drizzle") {
-            weatherIcon.src = "images/partly-cloudy.svg"
-        }
-        else if(data.weather[0].main == "Rain") {
-            weatherIcon.src = "images/rainy.svg"
-        }
-        else if(data.weather[0].main == "Snow") {
-            weatherIcon.src = "images/snowing.svg"
-        }
-        else if(data.weather[0].main == "Mist" || "Smoke" || "Haze" || "Dust" || "Fog" || "Sand" || "Ash" || "Squall" || "Tornado") {
-            weatherIcon.src = "images/windy-cloudy.svg"
-        }
-        else if(data.weather[0].main == "Clear") {
-            weatherIcon.src = "images/sunny.svg"
-        }
+        
+        const ikona = forecastData.list[3].weather[0].icon;
+        console.log(ikona);
+        let ikonaUrl = (weatherIconUrl + `${ikona}` + "@2x.png");
+        console.log(ikonaUrl);
+        document.querySelector(".myImg1").src = ikonaUrl;
+
+        const ikona2 = forecastData.list[10].weather[0].icon;
+        console.log(ikona2);
+        let ikonaUrl2 = (weatherIconUrl + `${ikona2}` + "@2x.png");
+        console.log(ikonaUrl2);
+        document.querySelector(".myImg2").src = ikonaUrl2;
+
+        const ikona3 = forecastData.list[18].weather[0].icon;
+        console.log(ikona3);
+        let ikonaUrl3 = (weatherIconUrl + `${ikona3}` + "@2x.png");
+        console.log(ikonaUrl3);
+        document.querySelector(".myImg3").src = ikonaUrl3;
+
+        const ikona4 = forecastData.list[26].weather[0].icon;
+        console.log(ikona4);
+        let ikonaUrl4 = (weatherIconUrl + `${ikona4}` + "@2x.png");
+        console.log(ikonaUrl4);
+        document.querySelector(".myImg4").src = ikonaUrl4;
+
+        const ikona5 = forecastData.list[34].weather[0].icon;
+        console.log(ikona5);
+        let ikonaUrl5 = (weatherIconUrl + `${ikona5}` + "@2x.png");
+        console.log(ikonaUrl5);
+        document.querySelector(".myImg5").src = ikonaUrl5;
 
         
     document.querySelector(".weather").style.display = "block";
