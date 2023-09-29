@@ -3,8 +3,31 @@ const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
 const forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&";
 const searchBox = document.querySelector(".search-input");
 const searchBtn = document.querySelector(".search-button");
+const locationBtn = document.querySelector(".location-button");
 const weatherIcon = document.querySelector(".weather-icon");
 const weatherIconUrl = "https://openweathermap.org/img/wn/";
+
+
+locationBtn.addEventListener("click", async function () {
+    navigator.geolocation.getCurrentPosition(async function locationWeather(location) {
+        const latitude = location.coords.latitude;
+        const longitude = location.coords.longitude;
+        console.log(latitude, longitude);
+
+        const reverseGeocodingUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
+        console.log(reverseGeocodingUrl);
+
+        const result = await fetch(reverseGeocodingUrl);
+        const reverseGeocodingData = await result.json();
+        console.log(reverseGeocodingData);
+
+        const cityName = reverseGeocodingData[0].name;
+        console.log(cityName);
+
+        checkWeather(cityName);
+    });
+});
+
 
 async function checkWeather(location) {
   const response = await fetch(`${apiUrl}${location}&appid=${apiKey}`);
@@ -12,18 +35,23 @@ async function checkWeather(location) {
     alert("City not found, try again. English letters only. You can try to use country code, for example: London, US");
   }
   console.log(response);
+
   const data = await response.json();
   console.log(data);
+
   const lat = data.coord.lat;
   console.log(lat);
+
   const lon = data.coord.lon;
   console.log(lon);
+
   const cityName = data.name;
   console.log(cityName);
 
   const forecast = await fetch(`${forecastApiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}`);
   const forecastData = await forecast.json();
   console.log(forecastData);
+
 
   // Filter data to include objects with "15:00:00" and "03:00:00" strings
   const filteredData = forecastData.list.filter(day => {
@@ -56,7 +84,7 @@ async function checkWeather(location) {
   document.querySelector(".weather-icon").src = showCurrentIcon;
 
   // Forecasted data
-  document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
+//   document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
   document.querySelector(".day2").textContent = filteredDataExcludingToday[0].dt_txt.split(" ")[0];
   document.querySelector(".day3").textContent = filteredDataExcludingToday[2].dt_txt.split(" ")[0];
   document.querySelector(".day4").textContent = filteredDataExcludingToday[4].dt_txt.split(" ")[0];
@@ -117,3 +145,5 @@ searchBox.addEventListener("keyup", function(event) {
 searchBtn.addEventListener("click", () => {
   checkWeather(searchBox.value);
 });
+
+ 
