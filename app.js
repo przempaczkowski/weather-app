@@ -14,7 +14,7 @@ locationBtn.addEventListener("click", async function () {
         const longitude = location.coords.longitude;
         console.log(latitude, longitude);
 
-        const reverseGeocodingUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
+        const reverseGeocodingUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
         console.log(reverseGeocodingUrl);
 
         const result = await fetch(reverseGeocodingUrl);
