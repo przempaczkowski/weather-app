@@ -7,6 +7,44 @@ const locationBtn = document.querySelector(".location-button");
 const weatherIcon = document.querySelector(".weather-icon");
 const weatherIconUrl = "https://openweathermap.org/img/wn/";
 
+// Initialize the Google Places Autocomplete service
+const autocompleteService = new google.maps.places.AutocompleteService();
+const placesService = new google.maps.places.PlacesService(document.createElement("div"));
+
+
+
+
+// Listen to input changes in the searchBox
+searchBox.addEventListener("input", () => {
+  const query = searchBox.value;
+  
+  // Perform a Places Autocomplete search
+  autocompleteService.getPlacePredictions({ input: query }, (predictions, status) => {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      // Clear previous suggestions
+      clearSuggestions();
+      
+      // Display new suggestions
+      predictions.forEach(prediction => {
+        displaySuggestion(prediction.description);
+      });
+    }
+  });
+});
+
+// Function to display a suggestion in the searchBox
+function displaySuggestion(suggestion) {
+  const datalist = document.getElementById("cities");
+  const option = document.createElement("option");
+  option.value = suggestion;
+  datalist.appendChild(option);
+}
+
+// Function to clear previous suggestions
+function clearSuggestions() {
+  const datalist = document.getElementById("cities");
+  datalist.innerHTML = "";
+}
 
 locationBtn.addEventListener("click", async function () {
     navigator.geolocation.getCurrentPosition(async function locationWeather(location) {

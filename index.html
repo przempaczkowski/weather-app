@@ -16,7 +16,7 @@
   
   <div class="search">  
     <button class="location-button"><img src="images/location-icon.svg"></button>
-    <input class="search-input" type="text" onfocus="this.value=''" value="Search..." spellcheck="false">
+    <input class="search-input" list="cities" type="text" onfocus="this.value=''" value="Search..." spellcheck="false"><datalist id="cities"></datalist>
     <button class="search-button" ><img src="images/search.svg"></button>
   </div>  
   <div class="weather">
@@ -81,6 +81,7 @@
   </div>
      
 </main>  
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlwPgpjG1lbPtNNOBGQIhtHrR6wdklKOo&libraries=places"></script>
 <script src="app.js"></script>  
 </body>  
 </html>
