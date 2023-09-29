@@ -21,16 +21,27 @@ locationBtn.addEventListener("click", async function () {
         const reverseGeocodingData = await result.json();
         console.log(reverseGeocodingData);
 
-        const cityName = reverseGeocodingData[0].name;
-        console.log(cityName);
+        const city = reverseGeocodingData[0].name;
+        console.log(city);
 
-        checkWeather(cityName);
+
+        const getCountry = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+        console.log(getCountry);
+
+        const resultat = await fetch(getCountry);
+        const getCountryCode = await resultat.json();
+        console.log(getCountryCode);
+
+        const countryCode = (getCountryCode.sys.country);
+        console.log(countryCode);
+
+        checkWeather(city, countryCode);
     });
 });
 
 
-async function checkWeather(location) {
-  const response = await fetch(`${apiUrl}${location}&appid=${apiKey}`);
+async function checkWeather(currentCity, country) {
+  const response = await fetch(`${apiUrl}`+ `${currentCity}` + `,${country}` + `&appid=${apiKey}`);
   if (response.status === 404) {
     alert("City not found, try again. English letters only. You can try to use country code, for example: London, US");
   }
