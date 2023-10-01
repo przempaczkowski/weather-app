@@ -1,5 +1,5 @@
 const apiKey = "2718fcf9bd8838aeb76b3339e551a3b1";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&";
 const forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&";
 const searchBox = document.querySelector(".search-input");
 const searchBtn = document.querySelector(".search-button");
@@ -70,16 +70,20 @@ locationBtn.addEventListener("click", async function () {
         const getCountryCode = await resultat.json();
         console.log(getCountryCode);
 
+        const locationName = (getCountryCode.name);
+        console.log(locationName);
+        
+        
         const countryCode = (getCountryCode.sys.country);
         console.log(countryCode);
 
-        checkWeather(city, countryCode);
+        checkWeather(latitude, longitude);
     });
 });
 
 
-async function checkWeather(currentCity, country) {
-  const response = await fetch(`${apiUrl}`+ `${currentCity}` + `,${country}` + `&appid=${apiKey}`);
+async function checkWeather(latitude, longitude) {
+  const response = await fetch(`${apiUrl}`+ `lat=${latitude}` + `&lon=${longitude}` + `&appid=${apiKey}`);
   if (response.status === 404) {
     alert("City not found, try again. English letters only. You can try to use country code, for example: London, US");
   }
