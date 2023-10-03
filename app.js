@@ -7,45 +7,64 @@ const locationBtn = document.querySelector(".location-button");
 const weatherIcon = document.querySelector(".weather-icon");
 const weatherIconUrl = "https://openweathermap.org/img/wn/";
 
-// Initialize the Google Places Autocomplete service
-const autocompleteService = new google.maps.places.AutocompleteService();
-const placesService = new google.maps.places.PlacesService(document.createElement("div"));
+
+const geoapifyApiKey = "28d1b2009ddf40e58e6798b795316b2d";
 
 
 
-
-// Listen to input changes in the searchBox
-searchBox.addEventListener("input", () => {
-  const query = searchBox.value;
-  
-  // Perform a Places Autocomplete search
-  autocompleteService.getPlacePredictions({ input: query }, (predictions, status) => {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      // Clear previous suggestions
-      clearSuggestions();
-      
-      // Display new suggestions
-      predictions.forEach(prediction => {
-        displaySuggestion(prediction.description);
-      });
-    }
-  });
+searchBox.addEventListener("keyup", function(event) {
+  autocomplete(event.target.value);
 });
 
-// Function to display a suggestion in the searchBox
-function displaySuggestion(suggestion) {
-  const datalist = document.getElementById("cities");
-  const option = document.createElement("option");
-  option.value = suggestion;
-  datalist.appendChild(option);
+async function autocomplete(input) {
+  const apiKey = "28d1b2009ddf40e58e6798b795316b2d";
+  const apiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${apiKey}`;
+
+  const response = await fetch(apiUrl);
+  const data = await response.json();
+
+  const dataList = document.querySelector("#cities");
+  dataList.innerHTML = ""; // Clear the current list
+
+  // Add each suggestion to the datalist
+  data.features.forEach((item) => {
+    const option = document.createElement("option");
+    const cityName = item.properties.city;
+    const countryName = item.properties.country;
+    const stateCode = item.properties.state;
+    let optionValue = cityName;
+  
+    if (countryName === "United States") {
+      optionValue += `, ${stateCode}`};
+    // } else {
+    //   optionValue += `, ${stateName}`;
+    // }
+  
+    option.value = optionValue;
+    option.dataset.lat = item.geometry.coordinates[1];
+    option.dataset.lon = item.geometry.coordinates[0];
+    dataList.appendChild(option);
+  });
 }
 
-// Function to clear previous suggestions
-function clearSuggestions() {
-  const datalist = document.getElementById("cities");
-  datalist.innerHTML = "";
-}
 
+
+function showSuggestions(suggestions) {
+  const dataList = document.querySelector('#cities');
+  dataList.innerHTML = ''; // Clear the previous options
+
+  suggestions.forEach((suggestion) => {
+    const option = document.createElement('option');
+    option.value = suggestion.properties.formatted;
+    option.addEventListener('click', async () => {
+      const lat = suggestion.properties.lat;
+      const lon = suggestion.properties.lon;
+      await checkWeather(lat, lon);
+      console.log(lat, lon);
+    });
+    dataList.appendChild(option);
+  });
+}
 locationBtn.addEventListener("click", async function () {
     navigator.geolocation.getCurrentPosition(async function locationWeather(location) {
         const latitude = location.coords.latitude;
@@ -191,12 +210,20 @@ async function checkWeather(latitude, longitude) {
 searchBox.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.key === "Enter") {
-    checkWeather(searchBox.value);
+    const selectedOption = getSelectedOption();
+    checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
   }
 });
 
 searchBtn.addEventListener("click", () => {
-  checkWeather(searchBox.value);
+  const selectedOption = getSelectedOption();
+  checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
 });
+
+function getSelectedOption() {
+  const inputValue = searchBox.value;
+  const options = document.querySelectorAll("#cities option");
+  return Array.from(options).find(option => option.value === inputValue);
+}
 
  
