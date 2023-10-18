@@ -10,7 +10,12 @@ const sotd = document.querySelector(".sotd");
 
 const geoapifyApiKey = "28d1b2009ddf40e58e6798b795316b2d";
 
-
+function clearFragranceSuggestions() {
+  // Check if the sotd element exists
+  if (sotd) {
+    sotd.innerHTML = ""; // Clear the contents
+  }
+}
 
 searchBox.addEventListener("keyup", function(event) {
   autocomplete(event.target.value);
@@ -66,6 +71,7 @@ function showSuggestions(suggestions) {
   });
 }
 locationBtn.addEventListener("click", async function () {
+  clearFragranceSuggestions();
     navigator.geolocation.getCurrentPosition(async function locationWeather(location) {
         const latitude = location.coords.latitude;
         const longitude = location.coords.longitude;
@@ -254,6 +260,7 @@ searchBox.addEventListener("keyup", function(event) {
 });
 
 searchBtn.addEventListener("click", () => {
+  clearFragranceSuggestions();
   const selectedOption = getSelectedOption();
   checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
 });
@@ -346,7 +353,7 @@ async function checkTypedWeather(location) {
             
       });
   
-
+  
   // Forecasted data
   // document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
   document.querySelector(".day2").textContent = filteredDataExcludingToday[0].dt_txt.split(" ")[0];
@@ -397,9 +404,12 @@ async function checkTypedWeather(location) {
   document.querySelector(".myImg5").src = ikonaUrl5;
 
   document.querySelector(".weather").style.display = "block";
+
+  
 }
 
 searchBox.addEventListener("keyup", function(event) {
+  clearFragranceSuggestions();
   event.preventDefault();
   if (event.key === "Enter") {
     checkTypedWeather(searchBox.value);
@@ -407,6 +417,7 @@ searchBox.addEventListener("keyup", function(event) {
 });
 
 searchBtn.addEventListener("click", () => {
+  clearFragranceSuggestions();
   checkTypedWeather(searchBox.value);
 });
  
