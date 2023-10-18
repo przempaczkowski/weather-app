@@ -13,7 +13,7 @@ body {
     background: linear-gradient(150deg, rgb(2, 112, 103) 0%, rgb(63, 173, 236) 100%);  
     background-attachment: fixed;  
 }  
-    
+
 .main-container {  
     display: flex; 
     justify-content: center; 
@@ -147,4 +147,14 @@ button {
     .search input {
         width: 50%;
     }
+}
+.sotd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
 }

@@ -6,7 +6,7 @@ const searchBtn = document.querySelector(".search-button");
 const locationBtn = document.querySelector(".location-button");
 const weatherIcon = document.querySelector(".weather-icon");
 const weatherIconUrl = "https://openweathermap.org/img/wn/";
-
+const sotd = document.querySelector(".sotd");
 
 const geoapifyApiKey = "28d1b2009ddf40e58e6798b795316b2d";
 
@@ -35,7 +35,7 @@ async function autocomplete(input) {
     let optionValue = cityName;
   
     if (countryName === "United States") {
-      optionValue += `, ${stateCode}`};
+      optionValue += `, ${stateCode}, ${countryName}`};
     // } else {
     //   optionValue += `, ${stateName}`;
     // }
@@ -145,7 +145,9 @@ async function checkWeather(latitude, longitude) {
 
   // Current data
   document.querySelector(".location").textContent = data.name;
-  document.querySelector(".current-temperature").textContent = `${Math.round(data.main.temp)}°C`;
+  const currentTemp = document.querySelector(".current-temperature");
+  currentTemp.textContent = `${Math.round(data.main.temp)}°C`;
+  console.log(currentTemp);
   document.querySelector(".wind").textContent = `${Math.round(data.wind.speed)} km/h`;
   document.querySelector(".feels-like").textContent = `${Math.round(data.main.feels_like)}°C`;
 
@@ -154,6 +156,42 @@ async function checkWeather(latitude, longitude) {
   let showCurrentIcon = `${weatherIconUrl}${currentIcon}@2x.png`;
   console.log(showCurrentIcon);
   document.querySelector(".weather-icon").src = showCurrentIcon;
+
+  const currentTempElement = document.querySelector(".current-temperature");
+
+  fetch('./data.json')
+      .then((response) => response.json())
+      .then((fragrances) => {
+          const currentTemp = parseFloat(currentTempElement.textContent);
+          
+          // Filter the fragrances that have "fall" in the "season" array
+          const fallFragrances = fragrances.filter(fragrance => fragrance.season.includes("Fall"));
+  
+          // Check if there are any fragrances that match the condition
+          if (currentTemp > 0 && currentTemp < 20 && fallFragrances.length > 0) {
+              // Randomly choose one fragrance
+              const randomIndex = Math.floor(Math.random() * fallFragrances.length);
+              const selectedFragrance = fallFragrances[randomIndex];
+              const selectedFragranceName = selectedFragrance.name;
+              const selectedFragranceSimilar = selectedFragrance.similar.join(' or ');
+              console.log("Suggested SOTD: ", selectedFragranceName);
+              console.log("Alternatives :", selectedFragranceSimilar);
+
+              const suggestedSotd = document.createElement('h5');
+              suggestedSotd.innerHTML = `Suggested SOTD: ${selectedFragranceName}`;
+              sotd.appendChild(suggestedSotd);
+
+              const suggestedAlternatives = document.createElement('h6');
+              suggestedAlternatives.innerHTML = `Alternatives: ${selectedFragranceSimilar}`;
+              sotd.appendChild(suggestedAlternatives);
+          } else {
+              console.log("No fragrances with 'Fall' season found.");
+          }
+            
+      });
+  
+  
+
 
   // Forecasted data
 //   document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
@@ -275,8 +313,42 @@ async function checkTypedWeather(location) {
   console.log(showCurrentIcon);
   document.querySelector(".weather-icon").src = showCurrentIcon;
 
+  const currentTempElement = document.querySelector(".current-temperature");
+
+  fetch('./data.json')
+      .then((response) => response.json())
+      .then((fragrances) => {
+          const currentTemp = parseFloat(currentTempElement.textContent);
+          
+          // Filter the fragrances that have "fall" in the "season" array
+          const fallFragrances = fragrances.filter(fragrance => fragrance.season.includes("Fall"));
+  
+          // Check if there are any fragrances that match the condition
+          if (currentTemp > 0 && currentTemp < 20 && fallFragrances.length > 0) {
+              // Randomly choose one fragrance
+              const randomIndex = Math.floor(Math.random() * fallFragrances.length);
+              const selectedFragrance = fallFragrances[randomIndex];
+              const selectedFragranceName = selectedFragrance.name;
+              const selectedFragranceSimilar = selectedFragrance.similar.join(' or ');
+              console.log("Suggested SOTD: ", selectedFragranceName);
+              console.log("Alternatives :", selectedFragranceSimilar);
+
+              const suggestedSotd = document.createElement('h5');
+              suggestedSotd.innerHTML = `Suggested SOTD: ${selectedFragranceName}`;
+              sotd.appendChild(suggestedSotd);
+
+              const suggestedAlternatives = document.createElement('h6');
+              suggestedAlternatives.innerHTML = `Alternatives: ${selectedFragranceSimilar}`;
+              sotd.appendChild(suggestedAlternatives);
+          } else {
+              console.log("No fragrances with 'Fall' season found.");
+          }
+            
+      });
+  
+
   // Forecasted data
-  document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
+  // document.querySelector(".day1").textContent = forecastData.list[0].dt_txt.split(" ")[0];
   document.querySelector(".day2").textContent = filteredDataExcludingToday[0].dt_txt.split(" ")[0];
   document.querySelector(".day3").textContent = filteredDataExcludingToday[2].dt_txt.split(" ")[0];
   document.querySelector(".day4").textContent = filteredDataExcludingToday[4].dt_txt.split(" ")[0];

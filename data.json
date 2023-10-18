@@ -1,0 +1,185 @@
+[
+    {
+      "name": "Xerjoff 1861 Naxos",
+      "similar": ["Mugler Pure Havane", "Reyane Tradition Insurection II Wild"],
+      "fragranceFamily": "Sweet",
+      "gender": "Unisex",
+      "audience": "Masculine",
+      "season": ["Fall", "Winter"],
+      "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Tom Ford Oud Wood",
+        "similar": ["Thameen Carved Oud", "Maison Alhmabra Woody Oud"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Parfums de Marly Herod",
+        "similar": ["Essential Parfums Divine Vanille", "Armaf Radical Brown"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Xerjoff Alexandria II",
+        "similar": ["Moresque Tamima", "Ormonde Jayne Xandria"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Maison Francis Kurkdjian Grand Soir",
+        "similar": ["Floraiku Sound of a Ricochet", "Lattafa Perfumes Eternal Oud"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Tom Ford Tobacco Vanille",
+        "similar": ["Franck Boclet Tobacco", "Al Haramain Amber Oud Tobacco Edition"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Louis Vuitton Ombre Nomade",
+        "similar": ["Nishane Mana", "Flavia Nouveau Ambre"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Widian London",
+        "similar": ["Tom Ford Tuscan Leather", "Rasasi La Yuqawam"],
+        "fragranceFamily": "Leathery",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter", "Spring"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Maison Francis Kurkdjian Baccarat Rouge 540 EDP",
+        "similar": ["Tiziana Terenzi Spirito Fiorentino", "Zara Redt Temptation"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Feminine",
+        "season": ["Fall", "Winter", "Sprinig"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Xerjoff Accento",
+        "similar": ["Moresque Rand", "Zara Amber Fusion"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Spring", "Summer"],
+        "occasion": ["Daily", "Night Out"]
+    },
+    {
+        "name": "Xerjoff Casamorati Bouquet Ideale",
+        "similar": ["Arabian Oud Kalemat", "Lattafa Perfumes Raghba"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Feminine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Kilian Back to Black",
+        "similar": ["Unique'e Luxury Beverly Hills", "Paris Corner Emir When Soul Gets high"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Guerlain Bois d'Arménie",
+        "similar": ["L'erabolario Ambraliquida", "Guerlain Spiriteuse Double Vanille"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Kilian Black Phantom",
+        "similar": ["Zadig & Voltaire This Is Love! for Her", "Akro Dark"],
+        "fragranceFamily": "Gourmand",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Gucci Intense Oud",
+        "similar": ["Nasomatto Black Afghano", "The Woods COllection Dark FOrest"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Rosendo Mateu No 5",
+        "similar": ["YSL Babycat", "Lattafa Perfumes Ameer"],
+        "fragranceFamily": "Sweet",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter", "Spring"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Sweet Arabian Shaghaf Oud",
+        "similar": ["Lancome Oud Bouquet", "Lattafa Perfumes Oud Mood"],
+        "fragranceFamily": "Oriental",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter"],
+        "occasion": ["Evening", "Night Out"]
+    },
+    {
+        "name": "Essential Parfums Bois Imprial",
+        "similar": ["Marc-Antoine Barrois Ganymede", "Kenzo Homme EDP"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Summer", "Spring"],
+        "occasion": ["Daily"]
+    },
+    {
+        "name": "Xerjoff Fars",
+        "similar": ["Electimuss Auster", "Montale Arabians"],
+        "fragranceFamily": "Woody",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter", "Spring"],
+        "occasion": ["Evening", "Night Out", "Daily"]
+    },
+    {
+        "name": "YSL Tuxedo",
+        "similar": ["Rochas Moustache EDP", "Maison Alhmabra The Tux"],
+        "fragranceFamily": "Spicy",
+        "gender": "Unisex",
+        "audience": "Masculine",
+        "season": ["Fall", "Winter", "Spring"],
+        "occasion": ["Evening", "Night Out", "Daily"]
+    }
+
+    
+  ]
+  
