@@ -20,6 +20,7 @@ let autocomplete;
 
 function initAutocomplete() {
   autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-input'));
+  autocomplete.setTypes(['(cities)']);
 
   // Listen for the 'place_changed' event when the user selects a place
   autocomplete.addListener('place_changed', getPlaceDetails);
@@ -51,7 +52,7 @@ const apiKeyAutocomplete = 'AIzaSyBlwPgpjG1lbPtNNOBGQIhtHrR6wdklKOo';
 
 // Create a script element to load the Google Maps API
 const script = document.createElement('script');
-script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKeyAutocomplete}&libraries=places&callback=initAutocomplete`;
+script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKeyAutocomplete}&libraries=places&types=cities&callback=initAutocomplete`;
 script.async = true;
 
 // Append the script element to the document's body
