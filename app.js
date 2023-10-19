@@ -1,7 +1,7 @@
 const apiKey = "2718fcf9bd8838aeb76b3339e551a3b1";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&";
 const forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&";
-const searchBox = document.querySelector(".search-input");
+const searchBox = document.querySelector("#search-input");
 const searchBtn = document.querySelector(".search-button");
 const locationBtn = document.querySelector(".location-button");
 const weatherIcon = document.querySelector(".weather-icon");
@@ -16,67 +16,111 @@ function clearFragranceSuggestions() {
     sotd.innerHTML = ""; // Clear the contents
   }
 }
+let autocomplete;
 
-searchBox.addEventListener("keyup", function(event) {
-  autocomplete(event.target.value);
-});
+function initAutocomplete() {
+  autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-input'));
 
-async function autocomplete(input) {
-  const apiKey = "28d1b2009ddf40e58e6798b795316b2d";
-  const apiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${apiKey}`;
+  // Listen for the 'place_changed' event when the user selects a place
+  autocomplete.addListener('place_changed', getPlaceDetails);
+}
 
-  const response = await fetch(apiUrl);
-  const data = await response.json();
-  // console.log(data);
-  const dataList = document.querySelector("#cities");
-  dataList.innerHTML = ""; // Clear the current list
+function getPlaceDetails() {
+  const place = autocomplete.getPlace(); // Get the selected place
 
-  // Add each suggestion to the datalist
-  data.features.forEach((item) => {
-    const option = document.createElement("option");
-    const cityName = item.properties.city;
-    const cityLat = item.properties.lat;
-    console.log(cityLat);
-    const cityLon = item.properties;
-    console.log(cityLon);
-    const countryName = item.properties.country;
-    const stateCode = item.properties.state;
-    let optionValue = `${cityName}, ${stateCode}, ${countryName}`;
+  if (!place.geometry) {
+    console.error('Place details are not available for this location.');
+    return;
+  }
+
+  // Extract latitude and longitude from the place object
+  const selectedLatitude = place.geometry.location.lat();
+  const selectedLongitude = place.geometry.location.lng();
+
+  console.log('Selected Place:', place.name);
+  console.log('Latitude:', selectedLatitude);
+  console.log('Longitude:', selectedLongitude);
+
+  checkWeather(selectedLatitude, selectedLongitude);
+  clearFragranceSuggestions();
+}
+
+
+// Define your API key
+const apiKeyAutocomplete = 'AIzaSyBlwPgpjG1lbPtNNOBGQIhtHrR6wdklKOo';
+
+// Create a script element to load the Google Maps API
+const script = document.createElement('script');
+script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKeyAutocomplete}&libraries=places&callback=initAutocomplete`;
+script.async = true;
+
+// Append the script element to the document's body
+document.body.appendChild(script);
+
+
+
+
+
+// searchBox.addEventListener("keyup", function(event) {
+//   autocomplete(event.target.value);
+// });
+
+// async function autocomplete(input) {
+//   const apiKey = "28d1b2009ddf40e58e6798b795316b2d";
+//   const apiUrl = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${apiKey}`;
+
+//   const response = await fetch(apiUrl);
+//   const data = await response.json();
+//   // console.log(data);
+//   const dataList = document.querySelector("#cities");
+//   dataList.innerHTML = ""; // Clear the current list
+
+//   // Add each suggestion to the datalist
+//   data.features.forEach((item) => {
+//     const option = document.createElement("option");
+//     const cityName = item.properties.city;
+//     const cityLat = item.properties.lat;
+//     console.log(cityLat);
+//     const cityLon = item.properties;
+//     console.log(cityLon);
+//     const countryName = item.properties.country;
+//     const stateCode = item.properties.state;
+//     let optionValue = `${cityName}, ${stateCode}, ${countryName}`;
   
       
-    option.value = optionValue;
-    option.dataset.lat = item.geometry.coordinates[1];
-    option.dataset.lon = item.geometry.coordinates[0];
-    dataList.appendChild(option);
-  });
-}
+//     option.value = optionValue;
+//     option.dataset.lat = item.geometry.coordinates[1];
+//     option.dataset.lon = item.geometry.coordinates[0];
+//     dataList.appendChild(option);
+//   });
+// }
 
 
 
-function showSuggestions(suggestions) {
-  const dataList = document.querySelector('#cities');
-  dataList.innerHTML = ''; // Clear the previous options
+// function showSuggestions(suggestions) {
+//   const dataList = document.querySelector('#cities');
+//   dataList.innerHTML = ''; // Clear the previous options
 
-  suggestions.forEach((suggestion) => {
-    const option = document.createElement('option');
-    option.value = suggestion.properties.formatted;
-    option.addEventListener('click', async () => {
-      const lat = suggestion.properties.lat;
-      const lon = suggestion.properties.lon;
-      await checkWeather(lat, lon);
-      console.log(lat, lon);
-    });
-    dataList.appendChild(option);
-  });
-}
-document.querySelector("#cities").addEventListener("click", function (event) {
-  const selectedOption = event.target;
-  if (selectedOption && selectedOption.value) {
-    const lat = selectedOption.dataset.lat;
-    const lon = selectedOption.dataset.lon;
-    checkWeather(lat, lon);
-  }
-});
+//   suggestions.forEach((suggestion) => {
+//     const option = document.createElement('option');
+//     option.value = suggestion.properties.formatted;
+//     option.addEventListener('click', async () => {
+//       const lat = suggestion.properties.lat;
+//       const lon = suggestion.properties.lon;
+//       await checkWeather(lat, lon);
+//       console.log(lat, lon);
+//     });
+//     dataList.appendChild(option);
+//   });
+// }
+// document.querySelector("#cities").addEventListener("click", function (event) {
+//   const selectedOption = event.target;
+//   if (selectedOption && selectedOption.value) {
+//     const lat = selectedOption.dataset.lat;
+//     const lon = selectedOption.dataset.lon;
+//     checkWeather(lat, lon);
+//   }
+// });
 
 locationBtn.addEventListener("click", async function () {
   clearFragranceSuggestions();
@@ -277,11 +321,11 @@ async function checkWeather(latitude, longitude) {
 //   checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
 //   });
 
-function getSelectedOption() {
-  const inputValue = searchBox.value;
-  const options = document.querySelectorAll("#cities option");
-  return Array.from(options).find(option => option.value === inputValue);
-}
+// function getSelectedOption() {
+//   const inputValue = searchBox.value;
+//   const options = document.querySelectorAll("#cities option");
+//   return Array.from(options).find(option => option.value === inputValue);
+// }
 
 async function checkTypedWeather(location) {
   const response = await fetch(`${apiUrl}` + `q=${location}&appid=${apiKey}`);
