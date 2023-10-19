@@ -27,7 +27,7 @@ async function autocomplete(input) {
 
   const response = await fetch(apiUrl);
   const data = await response.json();
-
+  // console.log(data);
   const dataList = document.querySelector("#cities");
   dataList.innerHTML = ""; // Clear the current list
 
@@ -35,16 +35,15 @@ async function autocomplete(input) {
   data.features.forEach((item) => {
     const option = document.createElement("option");
     const cityName = item.properties.city;
+    const cityLat = item.properties.lat;
+    console.log(cityLat);
+    const cityLon = item.properties;
+    console.log(cityLon);
     const countryName = item.properties.country;
     const stateCode = item.properties.state;
-    let optionValue = cityName;
+    let optionValue = `${cityName}, ${stateCode}, ${countryName}`;
   
-    if (countryName === "United States") {
-      optionValue += `, ${stateCode}, ${countryName}`};
-    // } else {
-    //   optionValue += `, ${stateName}`;
-    // }
-  
+      
     option.value = optionValue;
     option.dataset.lat = item.geometry.coordinates[1];
     option.dataset.lon = item.geometry.coordinates[0];
@@ -70,6 +69,15 @@ function showSuggestions(suggestions) {
     dataList.appendChild(option);
   });
 }
+document.querySelector("#cities").addEventListener("click", function (event) {
+  const selectedOption = event.target;
+  if (selectedOption && selectedOption.value) {
+    const lat = selectedOption.dataset.lat;
+    const lon = selectedOption.dataset.lon;
+    checkWeather(lat, lon);
+  }
+});
+
 locationBtn.addEventListener("click", async function () {
   clearFragranceSuggestions();
     navigator.geolocation.getCurrentPosition(async function locationWeather(location) {
@@ -146,6 +154,8 @@ async function checkWeather(latitude, longitude) {
     const dtDate = day.dt_txt.split(' ')[0]; // Extract the date part
     return dtDate !== currentDate;
   });
+
+  
 
   console.log(filteredDataExcludingToday);
 
@@ -251,19 +261,19 @@ async function checkWeather(latitude, longitude) {
   document.querySelector(".weather").style.display = "block";
 }
 
-searchBox.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.key === "Enter") {
-    const selectedOption = getSelectedOption();
-    checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
-  }
-});
 
-searchBtn.addEventListener("click", () => {
-  clearFragranceSuggestions();
-  const selectedOption = getSelectedOption();
-  checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
-});
+
+// searchBtn.addEventListener("click", () => {
+//   clearFragranceSuggestions();
+//   const selectedOption = getSelectedOption();
+//   checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
+// });
+
+// searchBox.addEventListener("click", () => {
+//   clearFragranceSuggestions();
+//   const selectedOption = getSelectedOption();
+//   checkWeather(selectedOption.dataset.lat, selectedOption.dataset.lon);
+//   });
 
 function getSelectedOption() {
   const inputValue = searchBox.value;
@@ -408,13 +418,17 @@ async function checkTypedWeather(location) {
   
 }
 
-searchBox.addEventListener("keyup", function(event) {
-  clearFragranceSuggestions();
+searchBox.addEventListener("keyup", function (event) {
   event.preventDefault();
   if (event.key === "Enter") {
+    clearFragranceSuggestions();
     checkTypedWeather(searchBox.value);
   }
 });
+
+// searchBox.addEventListener("input", function () {
+//   autocomplete(searchBox.value);
+// });
 
 searchBtn.addEventListener("click", () => {
   clearFragranceSuggestions();
