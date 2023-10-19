@@ -201,7 +201,9 @@ async function checkWeather(latitude, longitude) {
               suggestedAlternatives.innerHTML = `Alternatives: ${selectedFragranceSimilar}`;
               sotd.appendChild(suggestedAlternatives);
           } else {
-              console.log("No fragrances with 'Fall' season found.");
+              const suggestedSotd = document.createElement('h5');
+              suggestedSotd.innerHTML = "No fragrances with 'Fall' season found.";
+              sotd.appendChild(suggestedSotd);
           }
             
       });
@@ -358,7 +360,9 @@ async function checkTypedWeather(location) {
               suggestedAlternatives.innerHTML = `Alternatives: ${selectedFragranceSimilar}`;
               sotd.appendChild(suggestedAlternatives);
           } else {
-              console.log("No fragrances with 'Fall' season found.");
+              const suggestedSotd = document.createElement('h5');
+              suggestedSotd.innerHTML = "SOTD: No fragrances with 'Winter' season found.";
+              sotd.appendChild(suggestedSotd);
           }
             
       });
