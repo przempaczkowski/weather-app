@@ -21,11 +21,10 @@ body {
 }  
     
 .search {  
-    width: 100%;  
+    width: 200%;
     display: flex;
     align-items: center; 
     justify-content: center; 
-    /* gap: 2rem; */
 }  
 
 .search input {

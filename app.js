@@ -17,10 +17,12 @@ function clearFragranceSuggestions() {
   }
 }
 let autocomplete;
-
+// const options = {
+//   fields: ['name'],
+// };
 function initAutocomplete() {
   autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-input'));
-  autocomplete.setTypes(['(cities)']);
+  
 
   // Listen for the 'place_changed' event when the user selects a place
   autocomplete.addListener('place_changed', getPlaceDetails);
@@ -28,22 +30,33 @@ function initAutocomplete() {
 
 function getPlaceDetails() {
   const place = autocomplete.getPlace(); // Get the selected place
-
+  console.log(place);
   if (!place.geometry) {
     console.error('Place details are not available for this location.');
     return;
   }
 
   // Extract latitude and longitude from the place object
-  const selectedLatitude = place.geometry.location.lat();
-  const selectedLongitude = place.geometry.location.lng();
+  const selectedLoLatitude = place.geometry.viewport.mb.lo;
+  const selectedHiLatitude = place.geometry.viewport.mb.hi;
+  const selectedLoLongitude = place.geometry.viewport.Oa.lo;
+  const selectedHiLongitude = place.geometry.viewport.Oa.hi;
 
+  const selectedLatitude = (selectedLoLatitude + selectedHiLatitude) / 2;
+  const selectedLongitude = (selectedLoLongitude + selectedHiLongitude) / 2;
+
+  
   console.log('Selected Place:', place.name);
   console.log('Latitude:', selectedLatitude);
   console.log('Longitude:', selectedLongitude);
 
-  checkWeather(selectedLatitude, selectedLongitude);
+  const googlePlaceName = place.name;
+  
+
+  checkWeather(selectedLatitude, selectedLongitude, googlePlaceName);
   clearFragranceSuggestions();
+
+  
 }
 
 
@@ -160,8 +173,8 @@ locationBtn.addEventListener("click", async function () {
 });
 
 
-async function checkWeather(latitude, longitude) {
-  const response = await fetch(`${apiUrl}`+ `lat=${latitude}` + `&lon=${longitude}` + `&appid=${apiKey}`);
+async function checkWeather(latitude, longitude, googlePlaceName) {
+  const response = await fetch(`${apiUrl}lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
   if (response.status === 404) {
     alert("City not found, try again. English letters only. You can try to use country code, for example: London, US");
   }
@@ -205,7 +218,7 @@ async function checkWeather(latitude, longitude) {
   console.log(filteredDataExcludingToday);
 
   // Current data
-  document.querySelector(".location").textContent = data.name;
+  document.querySelector(".location").textContent = googlePlaceName;
   const currentTemp = document.querySelector(".current-temperature");
   currentTemp.textContent = `${Math.round(data.main.temp)}°C`;
   console.log(currentTemp);
